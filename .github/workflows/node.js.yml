@@ -43,7 +43,7 @@ jobs:
           USER_NAME: ${{secrets.USER_NAME}}
 
       run: |
-          echo "$PRIVATE_KEY" > keypair.pem && chmod 600 private_key
+          echo "$PRIVATE_KEY" > keypair.pem && chmod 600 keypair.pem
           ssh -o StrictHostKeyChecking=no -i keypair.pem ${USER_NAME}@${HOSTNAME} '
           uname -a
           '
