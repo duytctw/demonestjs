@@ -45,6 +45,9 @@ jobs:
       run: |
           echo "$PRIVATE_KEY" > keypair.pem && chmod 600 keypair.pem
           ssh -o StrictHostKeyChecking=no -i keypair.pem ${USER_NAME}@${HOSTNAME} '
-          uname -a
+          cd /Document/demonestjs
+          git pull
+          npm install
+          npm run start
           '
 
