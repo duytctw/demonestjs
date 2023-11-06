@@ -2,9 +2,11 @@ name: Demo CICD
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    types:
+      - closed
 
 jobs:
   build:
@@ -28,6 +30,7 @@ jobs:
 
   deployment:
     needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     name: Deploy to EC2
     runs-on: ubuntu-latest
@@ -37,8 +40,8 @@ jobs:
     - name: Build & Deploy
       env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          HOSTNAME: ${{secrets.SSH_HOST}}
-          USER_NAME: ${{secrets.USER_NAME}}
+          HOSTNAME: ${{ secrets.SSH_HOST }}
+          USER_NAME: ${{ secrets.USER_NAME }}
 
       run: |
           echo "$PRIVATE_KEY" > keypair.pem && chmod 600 keypair.pem
@@ -47,4 +50,3 @@ jobs:
           cd Document/demonestjs
           git checkout main && git pull
           '
-
