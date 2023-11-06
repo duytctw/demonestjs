@@ -45,6 +45,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i keypair.pem ${HOSTNAME} '
           cat /etc/redhat-release
           cd Document/demonestjs
-          git checkout main && git
+          git checkout main && git pull
           '
 
