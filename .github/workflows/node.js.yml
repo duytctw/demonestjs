@@ -2,11 +2,9 @@ name: Demo CICD
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    types:
-      - closed
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -47,6 +45,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i keypair.pem ${HOSTNAME} '
           cat /etc/redhat-release
           cd Document/demonestjs
-          git checkout main && git pull
+          git checkout main && git
           '
 
