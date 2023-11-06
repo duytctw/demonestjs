@@ -44,9 +44,7 @@ jobs:
 
       run: |
           echo "$PRIVATE_KEY" > keypair.pem && chmod 600 keypair.pem
-          ssh -o StrictHostKeyChecking=no -i keypair.pem ${USER_NAME}@${HOSTNAME} '
-          cd Document/demonestjs
-          git checkout main && git pull
-          npm install
+          ssh -o StrictHostKeyChecking=no -i keypair.pem ${HOSTNAME} '
+          cat /etc/redhat-release
           '
 
