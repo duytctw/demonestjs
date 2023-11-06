@@ -2,9 +2,11 @@ name: Demo CICD
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    types:
+      - closed
 
 jobs:
   build:
@@ -14,7 +16,6 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -28,7 +29,6 @@ jobs:
     - run: npm test
 
   deployment:
-
     needs: build
 
     name: Deploy to EC2
